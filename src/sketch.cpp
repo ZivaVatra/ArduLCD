@@ -5,8 +5,8 @@
 // based on info got from here:
 // http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain
 
-#define LCDW=24
-#define LCDH=2
+const int LCDW = 24;
+const int LCDH = 2;
 
 // include the LCD library code:
 #include <LiquidCrystal.h>

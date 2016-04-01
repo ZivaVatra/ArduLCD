@@ -30,7 +30,7 @@ I don't know about you, but I use "ino" on the command line. cd to the root of t
 
 ## To Change the display size (default: 24x2)
 
-At the moment you have to edit the code directly, there are two defines you have to change LCDW and LCDH, which govern the LCD dimensions in character width and height respectively
+At the moment you have to edit the code directly, there are two constants you have to change LCDW and LCDH, which govern the LCD dimensions in character width and height respectively
 
 # Schematic
 
