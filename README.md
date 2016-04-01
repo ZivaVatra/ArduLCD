@@ -24,4 +24,14 @@ This code is nowhere near good, it is more like a hack than a proper development
 
 Well... it works. However on my testbench the LCD gets corrupted after a while. Not sure if that is due to the software timings being off, or due the length of wiring + noise (or the LCD itself, which was pulled from a junked telephone). So will have to investigate further. 
 
+# Building
 
+I don't know about you, but I use "ino" on the command line. cd to the root of the repor dir, and run "ino build", when completed successfully, run "ino upload" to push to arduino. 
+
+## To Change the display size (default: 24x2)
+
+At the moment you have to edit the code directly, there are two defines you have to change LCDW and LCDH, which govern the LCD dimensions in character width and height respectively
+
+# Schematic
+
+Todo: Add schematic here for how to wire up the arduino to a HD44780 LCD
