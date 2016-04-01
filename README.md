@@ -17,12 +17,12 @@ I decided to emulate the old "pic-an-lcd" interface. This was a serial to HD4478
 
 Because the Arduino is stupidly overpowered for such a simple task, I worked on making it fast. The HD44780 makes use of 8 bit transfers, and serial speed is at 115200.
 
-This code is nowhere near good, it is more like a hack than a proper development, but posted here in case someone else is interested in such a thing, and saves them the time to reverse engineer the protocol (the original "pic-an-lcd" page seems to have dropped of the internet, so had to work out what it is doing from the LCDproc docs).
+This code is nowhere near good, it is more like a hack than a proper development, but posted here in case someone else is interested in such a thing, and saves them the time to reverse engineer the protocol (the original "pic-an-lcd" page seems to have dropped off the internet, so had to work out what it is doing from the LCDproc docs).
 
 
-# Current status
+# Current status / known-bugs
 
-Well... it works. However on my testbench the LCD gets corrupted after a while. Not sure if that is due to the software timings being off, or due the length of wiring + noise (or the LCD itself, which was pulled from a junked telephone). So will have to investigate further. 
+Well... it works. However on my testbench the LCD gets corrupted after a while. Not sure if that is due to the software timings being off, or due the length of wiring + noise (or the LCD itself, which was pulled from a junked telephone). So will have to investigate further. Specifically transferring custom characters (as LCDproc does) to the LCD ends up with corruption. 
 
 # Building
 
