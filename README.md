@@ -9,15 +9,25 @@ So having bought an arduino, and realising how cheap and powerful it was, I thou
 
 # Design
 
-I decided to emulate the old "pic-an-lcd" interface. This was a serial to HD44780 interface that was used in the late 90's. I knew of it back then, but never bothered due to the abundance of parallel ports.  I decided to emulate this because:
+-- 02/04/2016
+
+Well, I found a user manual for the original PIC-an-LCD: http://www.phanderson.com/PIC-n-LCD/user_manual.html
+
+Turns out the protocol is far more advanced than I expected, allowing for quite a bit of control, higher level LCD functions, and the ability to either output a tone from a speaker, or to fire off 4 GPIO pins.
+
+In addition, after looking at the lcdproc source code, none of the advanced features are used. lcdproc basically just uses the "raw passthrough" escape characters to talk to the lcd directly. 
+
+
+-- 29/03/2016
+
+I decided to emulate the old "pic-an-lcd" interface. This was a (proprietery) serial to HD44780 interface that was used in the late 90's. I knew of it back then, but never bothered due to the abundance of parallel ports.  I decided to emulate this because:
 
 1. It is old enough that it is supposed by most LCD software. In particular the software I tend to use (LCDproc and lcd4linux)
 2. It is serial based, so I can make use of the existing USB->Serial interface provided by the arduino. 
-3. It is a relatively simple protocol, being not much more than a serial encapsulation of HD44780 commands and data. 
 
 Because the Arduino is stupidly overpowered for such a simple task, I worked on making it fast. The HD44780 makes use of 8 bit transfers, and serial speed is at 115200.
 
-This code is nowhere near good, it is more like a hack than a proper development, but posted here in case someone else is interested in such a thing, and saves them the time to reverse engineer the protocol (the original "pic-an-lcd" page seems to have dropped off the internet, so had to work out what it is doing from the LCDproc docs).
+This code is nowhere near good, it is more like a hack than a proper development, but posted here in case someone else is interested in such a thing, and saves them the time to reverse engineer the protocol. The original "pic-an-lcd" page seems to have dropped off the internet (http://www.cyberramp.net/~dale) , so had to work out what it is doing from the LCDproc docs and other sources.
 
 
 # Current status / known-bugs
