@@ -25,7 +25,7 @@ void setup() {
 	// set up the LCD's number of columns and rows:
 	lcd.begin(LCDW, LCDH);
 	// set up serial
-	Serial.begin(19200); 
+	Serial.begin(57600); 
 	lcd.display();
 	lcd.clear();
 
