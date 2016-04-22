@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <Arduino.h>
-
+// vim: ts=4 ai
 // based on info got from here:
 // http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain
 
@@ -43,6 +43,13 @@ void loop() {
 	while (Serial.available() > 0) {
 		cmd = Serial.read();
 		switch(cmd) {
+			case 0x00:
+                while (1) {
+					cmd = Serial.read();
+					if (cmd != -1) { break; }
+                }   
+                lcd.write(cmd);
+				break;
 			case 0x1:
 				// set cursor position, next byte is pos
 	            while (Serial.available() == 0) {
