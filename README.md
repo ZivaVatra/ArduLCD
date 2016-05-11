@@ -13,7 +13,7 @@ So having bought an arduino, and realising how cheap and powerful it was, I thou
 
 We have a first working version of ArduLCD. Supports HD44780 displays using the pic-an-lcd driver of LCDd (tested on version 0.5.5). If you would like to see some pictures of it in action, see the site link below. Created an entry on my site for this project, because while github is good, it isn't best for project write ups (plus like google code, github may vanish one day, so good to have the main source of the project under my control). I plan to have the bulk of news updates on github though. 
 
-http://www.ziva-vatra.com/index.php?aid=75
+http://www.ziva-vatra.com/index.php?aid=75&id=SGFyZHdhcmU=
 
 -- 02/04/2016
 
