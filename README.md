@@ -29,7 +29,7 @@ In addition, after looking at the lcdproc source code, none of the advanced feat
 I decided to emulate the old "pic-an-lcd" interface. This was a (proprietery) serial to HD44780 interface that was used in the late 90's. I knew of it back then, but never bothered due to the abundance of parallel ports.  I decided to emulate this because:
 
 1. It is old enough that it is supposed by most LCD software. In particular the software I tend to use (LCDproc and lcd4linux)
-2. It is serial based, so I can make use of the existing USB->Serial interface provided by the arduino. 
+2. It is serial based, so I can make use of the existing USB->Serial interface provided by the arduino.
 
 Because the Arduino is stupidly overpowered for such a simple task, I worked on making it fast. The HD44780 makes use of 8 bit transfers, and serial speed is at 57600 baud.
 
@@ -42,7 +42,14 @@ Currently there are no known bugs. It seems to work fine on my test rig, and the
 
 # Building
 
-I don't know about you, but I use "ino" on the command line. cd to the root of the repor dir, and run "ino build", when completed successfully, run "ino upload" to push to arduino. 
+I don't know about you, but I use "ino" on the command line. cd to the root of the repor dir, and run "ino build", when completed successfully, run "ino upload" to push to arduino.
+
+commands to run for install (I use Devuan/Debian, alter to taste for your specific distro):
+``` apt install arduino-mk
+```
+
+``` pip install ino --user ```
+
 
 ## To Change the display size (default: 24x2)
 
