@@ -62,4 +62,4 @@ At the moment you have to edit the code directly, there are two constants you ha
 
 # Schematic
 
-Find it in "resources", called "wiring_schematic.sch"
+Find it in "resources", called "wiring_schematic.sch". There is a png version too if you just want to view without editing, "wiring_schematic.png"
