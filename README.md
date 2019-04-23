@@ -63,3 +63,9 @@ At the moment you have to edit the code directly, there are two constants you ha
 # Schematic
 
 Find it in "resources", called "wiring_schematic.sch". There is a png version too if you just want to view without editing, "wiring_schematic.png"
+
+- R1: Variable resistor 1k
+- Q1: Any NPN transistor really (I used the faithful BC337
+- C1: 47uF Capacitor (any type, but if you use electrolytic make sure you get the polarity right!) 
+
+
