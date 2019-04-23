@@ -108,3 +108,6 @@ N 49800 49900 51500 49900 4
 N 50300 48800 51000 48800 4
 N 51000 48800 51000 48500 4
 N 49800 48400 50700 48400 4
+T 47700 42200 9 10 1 0 0 0 2
+Q1 and C1 are for PWM Backlight control
+They can be omitted if you don't want to control the backlight from software
