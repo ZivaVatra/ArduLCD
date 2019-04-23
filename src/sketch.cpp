@@ -5,6 +5,13 @@
 // based on info got from here:
 // http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain
 
+#define LED_PIN 10		// This is the pin the backlight is controlled by, it must be a PWM pin
+#define STARTUP_BRIGHTNESS 128	// What backlight brightness to start up with (50% by default).
+
+# define BAUDRATE 57600  // What baudrate to use for the serial port
+
+// There was a reason I did not use these as defines, but I can't
+// remember it :-/
 const int LCDW = 20;
 const int LCDH = 4;
 
@@ -18,16 +25,27 @@ const int LCDH = 4;
 /*  Note, while all the ardu documentation and schematics show 4-bit operation. 
 	It seems the library actually supports both 8-bit and 4-bit mode. It attempts
 	8-bit, then falls back to 4-bit */
-LiquidCrystal lcd(12, 11, 9,8,7,6, 5, 4, 3, 2);
-//LiquidCrystal lcd(12, 11,  5, 4, 3, 2); //4bit mode
+LiquidCrystal lcd(12, 11, 2, 3, 4, 5, 6, 7, 8, 9);
+
+
+void set_backlight(int value) {
+	// We can control the backlight via PWM here, range from 0 to 255 values
+	// 0 is "off", 255 is "on" (max brightness). 
+	analogWrite(LED_PIN, value); 	// pin 10 is PWM, so we can vary brightness this way
+}
 
 void setup() {
+	pinMode(LED_PIN, OUTPUT);           // set pin to output
+	// We first set the backlight to 50% brightness
+	set_backlight(STARTUP_BRIGHTNESS);
+
 	// set up the LCD's number of columns and rows:
 	lcd.begin(LCDW, LCDH);
 	// set up serial
-	Serial.begin(57600); 
+	Serial.begin(BAUDRATE); 
 	lcd.display();
 	lcd.clear();
+	lcd.write("Ready");
 
 }
 
@@ -179,7 +197,14 @@ void loop() {
 						break;
 				}
 			case 0x15:
-				// Set GPIOs (not implemented)
+				/* This was originally to set GPIOs. In our case
+				 * we are using it to set the value of the backlight
+				 * In both cases, you would send an 8-bit command, followed
+				 * by 8-bit data. Just that before the 8-bit data was to control
+				 * 8 1-bit channels, where here we take it as a 8-bit PWM value
+				 */
+				cmd = Serial.read();
+				set_backlight(cmd);
 				break;
 			case 0x16:
 				// print signed decimal number
