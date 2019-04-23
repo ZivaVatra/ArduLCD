@@ -1,5 +1,5 @@
 # ArduLCD
-Arduino based interface for HD44780 LCD to lcdproc/lcd4linux and equivalent.
+Arduino based interface for HD44780 LCD to lcdproc and equivalent.
 
 # Beginnings
 
