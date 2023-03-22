@@ -29,6 +29,12 @@ Therefore, for version 2, we decided to emulate the "serialVFD" interface. As th
 
 You can find this in the "resources" folder, with the name "wiring_schematic". You have both a png for general use/printing, and the original .sch file. It was done with gschem (http://www.geda-project.org/), and feel free to make improvements. The diagram includes a transistor, capacitor and wiring between the backlight and pin 10 for dynamic backlight brightness control. This is optional, and can be omitted if you are not interested in that capability.
 
+-- 22/03/2023
+
+- Work on SerialVFD. I'm using the Noritake VFD datasheet as reference, primarily because all my VFDs are Noritake, and I've had good experience with them.
+- One thing I had to change is the baud rate. SerialVFD does not support 57600 baud, so we run 115200 instead.
+- Also included example LCDd.conf file
+
 -- 19/07/2019
 
 Decided to make a new version. This one uses serialVFD protocol for communication. The old "pic-an-lcd" interface is no longer used.

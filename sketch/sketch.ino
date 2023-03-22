@@ -3,13 +3,12 @@
 #include <Arduino.h>
 // vim: ts=4 ai
 // based on info got from here:
-// http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain
-// https://github.com/lcdproc/lcdproc/blob/master/server/drivers/hd44780-serial.c
+// http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain// https://lcdproc.sourceforge.net/docs/lcdproc-0-5-6-user.html#serialVFD-serial-connections.circuit
 
-#define LED_PIN 10		// This is the pin the backlight is controlled by, it must be a PWM pin
-#define STARTUP_BRIGHTNESS 128 // What backlight brightness to start up with (50% by default).
+#define LED_PIN 10  // This is the pin the backlight is controlled by, it must be a PWM pin
+#define STARTUP_BRIGHTNESS 1 // What backlight brightness to start up with (50% by default).
 
-# define BAUDRATE 57600  // What baudrate to use for the serial port
+# define BAUDRATE 19200 // What baudrate to use for the serial port
 
 // Apprently you should not use Defines in C++. Even though I try to keep my code as much
 // "C" as possible, the Arduino libraries are C++
@@ -28,6 +27,9 @@ const int LCDH = 4;
 	8-bit, then falls back to 4-bit */
 LiquidCrystal lcd(12, 11, 2, 3, 4, 5, 6, 7, 8, 9);
 
+// Globals
+int input = -1;
+
 
 void set_backlight(int value) {
 	// We can control the backlight via PWM here, range from 0 to 255 values
@@ -43,74 +45,106 @@ void setup() {
 	// set up the LCD's number of columns and rows:
 	lcd.begin(LCDW, LCDH);
 	// set up serial
-	Serial.begin(BAUDRATE); 
+	Serial.begin(BAUDRATE);
 	lcd.display();
 	lcd.clear();
 	lcd.write("Ready");
 
 }
 
+
+void process_escape_table(byte cmd) {
+		switch(cmd) {
+			case 'L':
+				/*
+				if the instruction command is byte 'L', it is to set the backlight.
+				Based on the docs next byte can be one of: 0x00(25%), 0x40(50%), 0x80 (75%), 0xC0(100%).
+
+				I've added instruction 0xFF to turn backlight off completely, not part of spec.
+				*/
+
+				cmd = serial_read();
+				switch(cmd) {
+					case 0x00:
+						//set brightness to 25%
+						set_backlight(1);
+						break;
+					case 0x40:
+						//set brightness to 50%
+						set_backlight(64);
+						break;
+					case 0x80:
+						//set brightness to 75%
+						set_backlight(128);
+						break;
+					case 0xC0:
+						//set brightness to 100%
+						set_backlight(255);
+						break;
+					case 0xFF:
+						set_backlight(0);
+						break;
+				}
+				break;
+			case 'T':
+				/* this is the cursor blink speed, currently not implemented so we just
+				read and discard the command */
+				serial_read();
+				break;
+			case 'H':
+				// Cursor position
+				lcd.write('H');
+				lcd.write(serial_read()); // Read in position byte and write to LCD
+				break;
+			case 'C':
+				// User definable characters
+				lcd.write('C');
+				// Next is a 6 byte string, first byte is character to replace
+				// The next 5 are the dot position numbers (5x7 per matrix)
+				for(int x = 0; x <= 5; x++) {
+					lcd.write(serial_read());
+				}
+				break;
+			default:
+				//other instructions have no arguments, so we forward to the LCD directly
+				lcd.write(cmd);
+				break;
+		}
+}
+
+byte serial_read() {
+	int result = -1;
+	while(result == -1) {
+		if(Serial.available() > 0) {
+			result = Serial.read();
+		}
+	}
+	return (byte)result;
+}
+
 void loop() {
 	// Todo: Investigate how to to interrupt driven serial I/O, like on PICs.
 	// sitting in a tight loop like this is quite wasteful. 
-	int x = 0;
-	char cmd; //will hold our sent command
-	int cursor = 0; //current cursor position (emulated)
-	int scursor = 0; 
-	char data[5]; //data buffer for (un)signed int printing
 
-	while (Serial.available() > 0) {
-		// Serial.read() is blocking, so we will wait until the serial buffer interrupt triggers
-		cmd = Serial.read();
+	// For reasons unknown input always equals 0xC5, even when defined as '0'
+	byte input = serial_read();
 
-		/*
-		so, serialVFD seems to be quite simple. There is an instruction escape character (0x1B)
-		which tells us the next byte is an instruction byte. The other bytes are just passed through.
+	/*
+	so, serialVFD seems to be quite simple. There is an instruction escape character (0x1B)
+	which tells us the next byte is an instruction byte. The other bytes are just passed through.
 		
-		We would need to capture a specific VFD instruction byte (0x4C + 00H to C0H) for setting VFD brightness, and
-		pass it to our LCD backlight control.
+	We would need to capture a specific VFD instruction byte (0x4C + 00H to C0H) for setting VFD brightness, and
+	pass it to our LCD backlight control.
 
-		The other commands should be possible to just pass through to the LCD.
-		*/
-		
+	The other commands should be possible to just pass through to the LCD.
+	*/
 
-		switch(cmd) {
-			// We got the escape command
-			case 0x1B:
-				while(1) {
-					cmd = Serial.read();
-					// Get the instruction command
-					if (cmd != -1)
-						break;
-					/*
-					Check if the instruction command is to set the backlight. Based on
-					the docs it can be one of: 0x4C(25%), 0x8C(50%), 0xCC (75%), 0x10C(100%).
-					The last one seems suspect, as it needs an extra byte, but we shall see).
-					*/
-					switch(cmd) {
-						case 0x4C:
-							//set brightness to 25%
-							set_backlight(64);
-							break;
-						case 0x8C:
-							//set brightness to 50%
-							set_backlight(128);
-							break;
-						case 0xCC:
-							//set brightness to 75%
-							set_backlight(192);
-							break;
-						case 0x10C:
-							//set brightness to 100%
-							set_backlight(255);
-							break;
-						default:
-							//other instructions we forward to the LCD
-							lcd.write(cmd);
-							break;
-					}
-				}
-				break;
-		}
+	if (input == 0x1B) {
+		// We got escape char, send to lcd then read next char and process
+		lcd.write(0x1B);
+		process_escape_table(serial_read());
+	} else {
+		lcd.write(input); // Everything else we pass through
 	}
 }
+
