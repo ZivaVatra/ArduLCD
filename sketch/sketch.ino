@@ -7,7 +7,7 @@
 // https://github.com/lcdproc/lcdproc/blob/master/server/drivers/hd44780-serial.c
 
 #define LED_PIN 10		// This is the pin the backlight is controlled by, it must be a PWM pin
-#define STARTUP_BRIGHTNESS 128	// What backlight brightness to start up with (50% by default).
+#define STARTUP_BRIGHTNESS 128 // What backlight brightness to start up with (50% by default).
 
 # define BAUDRATE 57600  // What baudrate to use for the serial port
 
