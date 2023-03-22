@@ -25,6 +25,7 @@ This code is nowhere near good, it is more like a hack than a proper development
 
 - Added LCDd.conf example for picanlcd
 - Switched over from ino (which is no longer under development), so the official Arduino IDE
+- Main development switching to "version2" branch, which will replace picanlcd protocol with serialVFD (more common)
 
 -- 23/04/2019
 
