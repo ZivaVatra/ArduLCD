@@ -21,6 +21,10 @@ This code is nowhere near good, it is more like a hack than a proper development
 
 
 # Current status
+-- 22/03/2023
+
+- Added LCDd.conf example for picanlcd
+- Switched over from ino (which is no longer under development), so the official Arduino IDE
 
 -- 23/04/2019
 
