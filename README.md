@@ -44,7 +44,7 @@ In addition, after looking at the lcdproc source code, none of the advanced feat
 
 # Known bugs
 
-Currently there are no known bugs. It seems to work fine on my test rig, and the first proper implementation on my server seems to work fine (blue 20x4 LCD, LCDd 0.5.5 on FreeBSD). Feel free to give it a test yourselves to see if you come across any problems. Feel free to raise a ticket if you come across anything. 
+Currently there are no known bugs. It seems to work fine on my test rig, and the first proper implementation on my server seems to work fine (blue 20x4 LCD, LCDd 0.5.5 on FreeBSD). Feel free to give it a test yourselves to see if you come across any problems, and raise a ticket if you come across any issues.
 
 # Building
 
