@@ -21,11 +21,15 @@ This code is nowhere near good, it is more like a hack than a proper development
 
 
 # Current status
+
+-- 23/03/2023
+
+- pic-an-lcd implementation archived in its own branch. No further active development will be done, but the protocol implementation itself may of of use to others in future, so will leave it here to gauge future interest.
+
 -- 22/03/2023
 
 - Added LCDd.conf example for picanlcd
 - Switched over from ino (which is no longer under development), so the official Arduino IDE
-- Main development switching to "version2" branch, which will replace picanlcd protocol with serialVFD (more common)
 
 -- 23/04/2019
 
