@@ -2,18 +2,12 @@
 #include <util/delay.h>
 #include <Arduino.h>
 // vim: ts=4 ai
-// based on info got from here:
-// http://lcdproc.cvs.sourceforge.net/viewvc/lcdproc/lcdproc/server/drivers/hd44780-serial.h?content-type=text%2Fplain
 
 #define LED_PIN 10		// This is the pin the backlight is controlled by, it must be a PWM pin
 #define STARTUP_BRIGHTNESS 2  // What backlight brightness to start up with (50% by default).
-
-# define BAUDRATE 57600 // What baudrate to use for the serial port
-
-// There was a reason I did not use these as defines, but I can't
-// remember it :-/
-const int LCDW = 20;
-const int LCDH = 4;
+#define BAUDRATE 57600 // What baudrate to use for the serial port
+#define LCDW 20  // LCD column length
+#define LCDH 4   // LCD number of rows
 
 // include the LCD library code:
 #include <LiquidCrystal.h>
@@ -45,10 +39,12 @@ void setup() {
 	// set up the LCD's number of columns and rows:
 	lcd.begin(LCDW, LCDH);
 	// set up serial
-	Serial.begin(BAUDRATE); 
+	Serial.begin(BAUDRATE);
 	lcd.display();
 	lcd.clear();
-	lcd.write("Ready");
+	char welcome[LCDW];
+	sprintf(welcome, "%dx%d Ready", LCDW, LCDH);
+	lcd.write(welcome);
 	lcd.home();
 
 }
@@ -79,6 +75,10 @@ static const struct hd44780_SerialInterface serial_interfaces[] = {
 	{ HD44780_CT_EZIO,          0xFE, 40,    0, 0x00, 0x00, 0x28,   2400,   4, 1, 0xFD, 0x06, 0,    0,    0,    0,   0,    0 }
 };
 
+Additional resources:
+
+https://github.com/lcdproc/lcdproc/blob/master/server/drivers/hd44780-serial.c
+https://lcdproc.sourceforge.net/docs/lcdproc-0-5-6-user.html#los-panel
 */
 
 void loop() {
