@@ -87,10 +87,14 @@ void loop() {
 			case 0xFE:
 				lcd.command(serial_read());
 				break;
+			case 0xFD:
+				// backlight control
+				set_backlight(serial_read());
+				break;
 			default:
 				// By default we write to the LCD
 				lcd.write(cmd);
 				break;
-
-}}
+	}
+}
 
