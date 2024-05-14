@@ -3,9 +3,10 @@ Arduino based interface for HD44780 LCD to lcdproc and equivalent.
 
 # Beginnings
 
-As time goes on, it is harder and harder to connected HD44780 LCDs to computer systems. It used to be that every computer had a parallel port, and you just wired it up there.  However fewer and fewer machines have parallel ports, and in some cases the software won't work (e.g. lcdproc on FreeBSD locks up if you try to use the parallel port). 
+As time goes on it is harder and harder to connected HD44780 LCDs to computer systems. It used to be that every computer had a parallel port and you just wired it up there.
+However fewer and fewer machines have parallel ports and in some cases the software won't work (e.g. lcdproc on FreeBSD locks up if you try to use the parallel port).
 
-So having bought an arduino, and realising how cheap and powerful it was, I thought it would be a good fit for a LCD to USB interface. It is also a relatively simple first project. 
+So having bought an Arduino and realising how cheap and powerful it was, I thought it would be a good fit for a LCD to USB interface. It is also a relatively simple first project to learn with.
 
 # Design
 
