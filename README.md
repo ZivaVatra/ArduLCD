@@ -17,24 +17,24 @@ Because the Arduino is stupidly overpowered for such a simple task, I worked on 
 
 
 # Current status
--- 22/03/2023
+### 22/03/2023
 
 - Added LCDd.conf example for los-panel
 - Switched over from ino (which is no longer under development), to the official Arduino IDE
 - Main development switching to "version3" branch, which will replace picanlcd protocol completely. The old master branch will be renamed "picanlcd", in case anyone specifically wants to use an implementation of that protocol in future.
 
--- 23/04/2019
+### 23/04/2019
 
 After an issue raised about lack of wiring diagram, I decided to whip one up and provide it here. You can find it in the "resources" folder. It was done with gschem (http://www.geda-project.org/), and feel free to make improvements. The diagram includes a transistor, capacitor and wiring between the backlight and pin 10 for dynamic backlight brightness control. This is optional, and can be omitted if you are not interested in that capability.
 
 If you do build in the PWM control circuitry, then you can utilise the old "GPIO" command in pic-an-lcd. This will allow you to vary the brightness of the backlight from 0 (off) to 255 (100%) via a serial command. Otherwise you can fix the brightness of your backlight at compile time by changing the "STARTUP_BRIGHTNESS" define in the code.
 
 
--- 02/05/2016
+### 02/05/2016
 
 We have a first working version of ArduLCD. Supports HD44780 displays using the pic-an-lcd driver of LCDd (tested on version 0.5.5).
 
--- 02/04/2016
+### 02/04/2016
 
 Well, I found a user manual for the original PIC-an-LCD: http://www.phanderson.com/PIC-n-LCD/user_manual.html
 
