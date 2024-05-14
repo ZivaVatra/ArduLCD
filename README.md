@@ -17,6 +17,16 @@ Because the Arduino is stupidly overpowered for such a simple task, I worked on 
 
 
 # Current status
+### 14/05/2024
+
+- Added example LCDd.conf for FreeBSD
+- Added some photos of my prototype, so you can see ArduLCD in action. The case I made out of some old 3.5" HDD sleds. Does the job fine. 
+
+[display](/resources/20231124_190425.jpg "LCD Display")
+[front](/resources/20231124_190616.jpg "Prototype front")
+
+This is the reference implementation (so matches the schematic directly) that I use for testing and development of ArduLCD.
+
 ### 22/03/2023
 
 - Added LCDd.conf example for los-panel
