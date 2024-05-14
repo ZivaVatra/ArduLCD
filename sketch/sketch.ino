@@ -4,7 +4,7 @@
 // vim: ts=4 ai
 
 #define LED_PIN 10		// This is the pin the backlight is controlled by, it must be a PWM pin
-#define STARTUP_BRIGHTNESS 2  // What backlight brightness to start up with (50% by default).
+#define STARTUP_BRIGHTNESS 2  // What backlight brightness to start up with (8-bit value)
 #define BAUDRATE 57600 // What baudrate to use for the serial port
 #define LCDW 20  // LCD column length
 #define LCDH 4   // LCD number of rows
@@ -28,12 +28,12 @@ byte cmd; //will hold our sent command
 void set_backlight(int value) {
 	// We can control the backlight via PWM here, range from 0 to 255 values
 	// 0 is "off", 255 is "on" (max brightness). 
-	analogWrite(LED_PIN, value);	// pin 10 is PWM, so we can vary brightness this way
+	analogWrite(LED_PIN, value);
 }
 
 void setup() {
 	pinMode(LED_PIN, OUTPUT);			// set pin to output
-	// We first set the backlight to 50% brightness
+	// We first set the backlight brightness
 	set_backlight(STARTUP_BRIGHTNESS);
 
 	// set up the LCD's number of columns and rows:
