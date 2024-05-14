@@ -1,5 +1,5 @@
 # ArduLCD
-Arduino based interface for HD44780 LCD to lcdproc and equivalent.
+Arduino based USB interface for HD44780 LCD to lcdproc and equivalent programs.
 
 # Beginnings
 
@@ -10,11 +10,9 @@ So having bought an Arduino and realising how cheap and powerful it was, I thoug
 
 # Design
 
-Originally using the picanlcd protocol, further investigation of lcdproc's drivers indicated that 99% of the protocol was unused, and therefore superfluous. With that, the bits it did use were not the most efficient, so I looked at some of the other protocols supported by the driver, and found the "los-panel" (For "LCD on Serial) protocol simpler to implement.
+Originally using an implementation of the pic-an-lcd protocol, further investigation of lcdproc's drivers indicated that 99% of the protocol was unused and therefore superfluous. In addition the bits it did use were not the most efficient, so I looked at some of the other protocols supported by the driver and found the "los-panel" (For "LCD on Serial) protocol not only simpler to implement, it had features that would be nice to include, such as backlight control. So version3 switched to this protocol, and after testing and use by myself, it is has been promoted to the stable "master" branch.
 
-So this version has switched to that protocol. Unfortunately that protocol does not support PWM backlight control, so we can only turn the backlight on and off for the moment.
-
-Because the Arduino is stupidly overpowered for such a simple task, I worked on making it fast. The HD44780 makes use of 8 bit transfers, and serial speed is at 57600 baud.
+As the Arduino is stupidly overpowered for such a simple task, I worked on making it fast. The HD44780 makes use of full 8 bit transfers and serial speed is at 57600 baud. I saw no real improvement running at faster baud rates as LCD display itself cannot refresh that quickly, however it should work if you want to go even faster (just change the BAUDRATE define).
 
 
 # Current status
