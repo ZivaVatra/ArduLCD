@@ -19,6 +19,7 @@ Because the Arduino is stupidly overpowered for such a simple task, I worked on 
 # Current status
 ### 14/05/2024
 
+- Version3 has been merged to master. This is now the new stable implementation. It makes use of "los-panel" driver, which is newer, cleaner and better supported.
 - Added example LCDd.conf for FreeBSD
 - Added some photos of my prototype, so you can see ArduLCD in action. The case I made out of some old 3.5" HDD sleds. Does the job fine. 
 
