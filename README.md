@@ -22,8 +22,8 @@ Because the Arduino is stupidly overpowered for such a simple task, I worked on 
 - Added example LCDd.conf for FreeBSD
 - Added some photos of my prototype, so you can see ArduLCD in action. The case I made out of some old 3.5" HDD sleds. Does the job fine. 
 
-![display](/resources/20231124_190621.jpg "LCD Display")
-![front](/resources/20231124_190616.jpg "Prototype front")
+![Ex1](/resources/20231124_190621.jpg "Example 1")
+![Ex2](/resources/20231124_190616.jpg "Example 2")
 
 This is the reference implementation (so matches the schematic directly) that I use for testing and development of ArduLCD.
 
